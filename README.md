@@ -19,9 +19,9 @@ $ sudo npm install
 ```
 3. If you have your own google API key, you'll need to do few thing.
 ```
-$ Open `App_Constant.js` file.
+$ Open `index.js` file from constant folder(src/constant/index.js).
 $ A GOOGLE_API_KEY constant is declare for API key.
-$ If you have your own google API key, Please change the value of the key
+$ If you have your own google API key, Replace your key instead of this.
 ```
 4. Lastly, run the start command to get the project off the ground.
 

@@ -1,12 +1,8 @@
 import React from 'react';
-import MapWithADirectionsRenderer from './mapComponent'
-import axios from 'axios';
-import   './common.css'
-import { MOCK_API_URL } from '../App_Constant'
-
-const HEADER = {
-    'Content-Type': "application/json"
-}
+import MapWithADirectionsRenderer from '../mapComponent'
+import LoadingSpinner from '../loadingSpineer'
+import   './formComponent.css'
+import { fetchPostApi, fetchGetApi} from '../../services'
 
 export default class Forms extends React.Component {
     constructor(props) {
@@ -40,7 +36,7 @@ export default class Forms extends React.Component {
     }
 
     callGetApiWithToken(response) {
-        axios.get(MOCK_API_URL + '/' + response.data.token)
+        fetchGetApi(response.data.token)
         .then(response => {
             if (response.data.status === "in progress") {
                 // Call callGetApiWithToken method, When status of get API is in progress
@@ -90,7 +86,7 @@ export default class Forms extends React.Component {
             statusFlag: true
         })
 
-        axios.post(MOCK_API_URL, { headers: HEADER }, { input })
+        fetchPostApi(input)
         .then(data => {
             this.callGetApiWithToken(data)
         })
@@ -106,28 +102,34 @@ export default class Forms extends React.Component {
         const {errorMessage, from, statusFlag, to, totalDistance, totalTime, path} = this.state
 
         return (
-            <div>
-                <div className="leftDiv">
-                    <label className="leftlabel">Starting location</label><br/><br/>
-                    <input className="leftlabel" type="text" name="from" value={from} onChange={this.handleChange}/><br/><br/>
-                    <label className="leftlabel">Drop-off point</label><br/><br/>
-                    <input className="leftlabel" name="to" type="text" value={to} onChange={this.handleChange} /><br/>
-                    { statusFlag && <span>In Progress...</span> }
-                    {totalDistance &&
-                    <span>Total Distance: {totalDistance}</span>}<br/>
-                    {totalTime &&
-                    <span>Total Time: {totalTime}</span>}<br/>
+            <React.Fragment>
+                <div className="col-md-3">
+                    <div className="form-group rowMargin">
+                        <label htmlFor="from">Starting location</label>
+                        <input className="form-control" id="from" type="text" name="from" value={from} onChange={this.handleChange}/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="to">Drop-off point</label>
+                        <input className="form-control" id="to" name="to" type="text" value={to} onChange={this.handleChange} />
+                    </div>
+                    <div className="form-group">
+                        {totalDistance &&
+                            <label>Total Distance: {totalDistance}</label>}<br/>
+                        {totalTime &&
+                            <label>Total Time: {totalTime}</label>}<br/>
+                    </div>
                     {errorMessage &&
-                    <label className="redLabel">{errorMessage}</label>}<br/>
-                    <button className="leftlabel" onClick={this.handleSubmitButton} >Submit</button>
-                    <button onClick={this.handleResetButton}>Reset</button>
+                        <label className="redLabel">{errorMessage}</label>}<br/>
+                    <button className="btn btn-primary submitBtn" onClick={this.handleSubmitButton} >Submit</button>
+                    <button className="btn btn-secondary resetBtn" onClick={this.handleResetButton}>Reset</button>
                     
                 </div>
-                <div className="rightDiv">
+                <div className="col-md-9 secondRowMargin">
                     <MapWithADirectionsRenderer path={path}></MapWithADirectionsRenderer>
                 </div>
-                
-            </div>
+                { statusFlag && <LoadingSpinner />}
+            </React.Fragment>
+            
         )
     }
   } 

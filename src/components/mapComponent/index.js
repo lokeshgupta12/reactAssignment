@@ -1,5 +1,5 @@
 import React from 'react';
-import { GOOGLE_API_URL } from '../App_Constant'
+import { GOOGLE_API_URL } from '../../constant'
 const { compose, withProps, lifecycle } = require("recompose");
 const {
   withScriptjs,
@@ -12,7 +12,7 @@ export const MapWithADirectionsRenderer = compose(
   withProps({
     googleMapURL: GOOGLE_API_URL,
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px` }} />,
+    containerElement: <div style={{ height: `600px` }} />,
     mapElement: <div style={{ height: `100%`, width: `100%` }} />,
   }),
   withScriptjs,

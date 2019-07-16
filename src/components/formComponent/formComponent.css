@@ -1,0 +1,19 @@
+.rowMargin {
+    margin-top: 28px;
+}
+
+.redLabel {
+    color: red;
+}
+
+.secondRowMargin {
+    margin-top: 9px;
+}
+
+.submitBtn {
+    margin-left: 46px;
+}
+
+.resetBtn {
+    margin-left: 16px;
+}

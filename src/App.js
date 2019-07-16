@@ -1,10 +1,9 @@
 import React from 'react';
-import './App.css';
-import Forms from './component/formComponent';
+import Forms from './components/formComponent/index';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <header >
         <Forms></Forms>
       </header>
