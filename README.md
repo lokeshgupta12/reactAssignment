@@ -3,7 +3,7 @@ In order to get started application, you'll need to do a few things first.
 
 1. Take clone from git repository
 ```
-$ https://github.com/lokeshgupta12/contactList.git
+$ https://github.com/lokeshgupta12/reactAssignment
 ```
 2. Goto my-app folder
 ```
