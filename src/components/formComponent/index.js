@@ -83,7 +83,8 @@ export default class Forms extends React.Component {
         }
 
         this.setState({
-            statusFlag: true
+            statusFlag: true,
+            errorMessage: ''
         })
 
         fetchPostApi(input)
@@ -122,7 +123,6 @@ export default class Forms extends React.Component {
                         <label className="redLabel">{errorMessage}</label>}<br/>
                     <button className="btn btn-primary submitBtn" onClick={this.handleSubmitButton} >Submit</button>
                     <button className="btn btn-secondary resetBtn" onClick={this.handleResetButton}>Reset</button>
-                    
                 </div>
                 <div className="col-md-9 secondRowMargin">
                     <MapWithADirectionsRenderer path={path}></MapWithADirectionsRenderer>
