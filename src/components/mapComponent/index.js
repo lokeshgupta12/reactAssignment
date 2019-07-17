@@ -12,7 +12,7 @@ export const MapWithADirectionsRenderer = compose(
   withProps({
     googleMapURL: GOOGLE_API_URL,
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `600px` }} />,
+    containerElement: <div style={{ height: `720px` }} />,
     mapElement: <div style={{ height: `100%`, width: `100%` }} />,
   }),
   withScriptjs,
