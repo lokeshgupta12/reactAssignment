@@ -5,7 +5,7 @@ const HEADER = {
 }
 
 export const fetchPostApi = (input) => {
-    return axios.post(MOCK_API_URL, { headers: HEADER }, { input })
+    return axios.post(MOCK_API_URL, { input }, { headers: HEADER })
 }
 
 export const fetchGetApi = (token) => {

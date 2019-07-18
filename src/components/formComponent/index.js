@@ -70,6 +70,11 @@ export default class Forms extends React.Component {
         })
     }
     
+    handleSelectForStartingLocation() {
+        const { value } = this.refs.fromInput
+        this.setState({from :value})
+    }
+
     handleSubmitButton() {
         const { from, to } = this.state
         const input = {
@@ -94,6 +99,11 @@ export default class Forms extends React.Component {
         })
     }
 
+    handleSelectForDropLocation() {
+        const { value } = this.refs.toInput
+        this.setState({to :value})
+    }
+
     render() {
         const { errorMessage, from, statusFlag, to, totalDistance, totalTime, path } = this.state
 
@@ -102,11 +112,11 @@ export default class Forms extends React.Component {
                 <div className="col-md-3">
                     <div className="form-group rowMargin">
                         <label htmlFor="from">Starting location</label>
-                        <input autoComplete="on" className="form-control" id="from" type="text" name="from" value={from} onChange={(e) => this.handleChange(e)}/>
+                        <input ref = "fromInput" className="form-control" id="from" type="text" name="from" value={from} onChange={(e) => this.handleChange(e)} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="to">Drop-off point</label>
-                        <input className="form-control" id="to" name="to" type="text" value={to} onChange={(e) => this.handleChange(e)} />
+                        <input ref = "toInput" className="form-control" id="to" name="to" type="text" value={to} onChange={(e) => this.handleChange(e)} />
                     </div>
                     {errorMessage &&
                         <label className="redLabel">{errorMessage}</label>}
@@ -118,7 +128,10 @@ export default class Forms extends React.Component {
                     <button className="btn btn-secondary resetBtn" onClick={() => this.handleResetButton()}>Reset</button>
                 </div>
                 <div className="col-md-9 secondRowMargin">
-                    <MapWithADirectionsRenderer path={path}></MapWithADirectionsRenderer>
+                    <MapWithADirectionsRenderer path={path}
+                        handleSelectForStating={this.handleSelectForStartingLocation.bind(this)}
+                        handleSelectForDrop={this.handleSelectForDropLocation.bind(this)}
+                    ></MapWithADirectionsRenderer>
                 </div>
                 { statusFlag && <LoadingSpinner />}
             </React.Fragment>

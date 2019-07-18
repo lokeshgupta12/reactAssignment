@@ -19,8 +19,11 @@ export const MapWithADirectionsRenderer = compose(
   withGoogleMap,
   lifecycle({
     componentDidMount() {
-      new window.google.maps.places.Autocomplete(document.getElementById('from'), {})
-      new window.google.maps.places.Autocomplete(document.getElementById('to'), {})
+      this.startingBox = new window.google.maps.places.Autocomplete(document.getElementById('from'), {})
+      this.dropBox = new window.google.maps.places.Autocomplete(document.getElementById('to'), {})
+
+      this.startingBox.addListener("place_changed", this.props.handleSelectForStating)
+      this.dropBox.addListener("place_changed", this.props.handleSelectForDrop)
     },
     componentWillReceiveProps(nextProps) {
       if (nextProps.path.length > 0) {
