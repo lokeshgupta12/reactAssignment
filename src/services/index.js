@@ -9,7 +9,7 @@ export const fetchPostApi = (input) => {
 }
 
 export const fetchGetApi = (token) => {
-    return axios.post(MOCK_API_URL + '/' + token)
+    return axios.get(MOCK_API_URL + '/' + token)
 }
 
 export default {

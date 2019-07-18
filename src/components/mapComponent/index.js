@@ -18,6 +18,10 @@ export const MapWithADirectionsRenderer = compose(
   withScriptjs,
   withGoogleMap,
   lifecycle({
+    componentDidMount() {
+      new window.google.maps.places.Autocomplete(document.getElementById('from'), {})
+      new window.google.maps.places.Autocomplete(document.getElementById('to'), {})
+    },
     componentWillReceiveProps(nextProps) {
       if (nextProps.path.length > 0) {
         const DirectionsService = new window.google.maps.DirectionsService()
