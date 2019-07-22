@@ -1,12 +1,3 @@
-import React from 'react';
-import './loading.css'
+import  LoadingSpinner  from './loadingSpineer';
 
-const LoadingSpinner = () => (
-    <div className="overlay">
-		<div className="overlay__inner">
-			<div className="overlay__content"><span className="spinner"></span></div>
-		</div>
-    </div>
-);
-
-export default LoadingSpinner;
+export default LoadingSpinner
