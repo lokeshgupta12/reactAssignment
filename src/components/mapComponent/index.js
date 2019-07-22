@@ -1,5 +1,5 @@
 import React from 'react';
-import { GOOGLE_API_URL } from '../../constant'
+import GMAP_SETTINGS from '../../config/gmap.config'
 const { compose, withProps, lifecycle } = require("recompose");
 const {
   withScriptjs,
@@ -8,12 +8,14 @@ const {
   DirectionsRenderer,
 } = require("react-google-maps");
 
+const { center, zoom, height, width, containerHeight } = GMAP_SETTINGS.MAP_SETTINGS
+
 export const MapWithADirectionsRenderer = compose(
   withProps({
-    googleMapURL: GOOGLE_API_URL,
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `720px` }} />,
-    mapElement: <div style={{ height: `100%`, width: `100%` }} />,
+    googleMapURL: GMAP_SETTINGS.GOOGLE_API_URL,
+    loadingElement: <div style={{ height: height }} />,
+    containerElement: <div style={{ height: containerHeight }} />,
+    mapElement: <div style={{ height: height, width: width }} />,
   }),
   withScriptjs,
   withGoogleMap,
@@ -22,8 +24,13 @@ export const MapWithADirectionsRenderer = compose(
       this.startingBox = new window.google.maps.places.Autocomplete(document.getElementById('from'), {})
       this.dropBox = new window.google.maps.places.Autocomplete(document.getElementById('to'), {})
 
-      this.startingBox.addListener("place_changed", this.props.handleSelectForStating)
-      this.dropBox.addListener("place_changed", this.props.handleSelectForDrop)
+      this.startingBox.addListener("place_changed", () => {
+          this.props.handleSelectForStating(this.startingBox)
+      })
+
+      this.dropBox.addListener("place_changed", () => {
+          this.props.handleSelectForDrop(this.dropBox)
+      })
     },
     componentWillReceiveProps(nextProps) {
       if (nextProps.path.length > 0) {
@@ -47,8 +54,8 @@ export const MapWithADirectionsRenderer = compose(
   })
 )(props =>
   <GoogleMap
-    defaultZoom={7}
-    defaultCenter={new window.google.maps.LatLng(41.8507300, -87.6512600)}
+    defaultZoom={zoom}
+    defaultCenter={new window.google.maps.LatLng(center.lat, center.lng)}
   >
   {props.directions && <DirectionsRenderer directions={props.directions} />}
   </GoogleMap>
