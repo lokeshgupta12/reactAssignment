@@ -1,11 +1,11 @@
 import React from 'react';
-import Forms from './components/formComponent/index';
+import FormComponent from './components/formComponent';
 
 function App() {
   return (
     <div>
       <header >
-        <Forms></Forms>
+        <FormComponent />
       </header>
     </div>
   );
